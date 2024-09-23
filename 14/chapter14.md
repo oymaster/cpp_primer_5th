@@ -136,9 +136,9 @@ int main() {
    };
    
    int main(){
-   	Smallint si;
-       si=4;//4被隐式转换成Smallint ,然后给构造函数
-       si+3;//si隐式转换成int
+        Smallint si;
+        si=4;//4被隐式转换成Smallint ,然后给构造函数
+        si+3;//si隐式转换成int
    }
    ```
 
