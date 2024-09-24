@@ -38,3 +38,38 @@
 - **友元类**：派生类可以作为基类的友元类，从而直接访问基类的私有成员。
 - **组合**：通过组合的方式，派生类可以间接访问基类的私有成员。
 
+## 问题
+
+代码：
+
+```cpp
+static bool compare(const std::shared_ptr<Quote>& lhs, 
+                    const std::shared_ptr<Quote>& rhs) {
+    return lhs->isbn() < rhs->isbn();
+}
+std::multiset<std::shared_ptr<Quote>, decltype(&compare)> items{&compare};
+```
+
+自定义比较函数
+
+`set`，`map`这种需要自定义比较规则的时候，传入的应该是可调用的对象
+
+例如新建类，或者类里面重构，并传入这个类。
+
+如果是普通的函数，需要传入这个函数指针，并指名函数指针的类型，避免类型混淆（特别是在运用模板中），同时还需要在后面添加一个实例
+
+而通过类的对象传参，则不需要在后面添加这个实例。
+
+如果普通函数不添加这个实例，则容器在初始化构造的时候，调用的还是默认的比较函数，容器需要一个实例去初始化。
+
+```cpp
+struct compare {
+    bool operator()(const std::shared_ptr<Quote>& lhs, 
+                    const std::shared_ptr<Quote>& rhs) const {
+        return lhs->isbn() < rhs->isbn(); // 按 ISBN 排序
+    }
+};
+std::multiset<std::shared_ptr<Quote>,compare> items；
+```
+
+上述例子就不需要指定函数指针，也不需要添加实例参数。
