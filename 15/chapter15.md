@@ -118,13 +118,13 @@ int main() {
 关键字为`virtual`
 
 ```cpp
-virtual void speak()；
+virtual void speak();
 ```
 
 而派生类可以定义同名函数实现不同内容通过`override`（可以不写，但最好写上）
 
 ```cpp
-void speak() override ；
+void speak() override;
 ```
 
 ### 2.注意点

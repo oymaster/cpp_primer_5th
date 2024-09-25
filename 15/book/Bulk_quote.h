@@ -20,33 +20,27 @@ public:
     using Disc_quote::Disc_quote;
 
 	// copy constructor
-	Bulk_quote(const Bulk_quote& bq) : Disc_quote(bq)
-	{
+	Bulk_quote(const Bulk_quote& bq) : Disc_quote(bq) {
 		std::cout << "Bulk_quote : copy constructor\n";
 	}
 
 	// move constructor
-	Bulk_quote(Bulk_quote&& bq) : Disc_quote(std::move(bq))
-	{
+	Bulk_quote(Bulk_quote&& bq) : Disc_quote(std::move(bq)) {
 		std::cout << "Bulk_quote : move constructor\n";
 	}
 
 	// copy =()
-	Bulk_quote& operator =(const Bulk_quote& rhs)
-	{
+	Bulk_quote& operator =(const Bulk_quote& rhs) {
 		Disc_quote::operator =(rhs);
 		std::cout << "Bulk_quote : copy =()\n";
-
 		return *this;
 	}
 
 
 	// move =()
-	Bulk_quote& operator =(Bulk_quote&& rhs)
-	{
+	Bulk_quote& operator =(Bulk_quote&& rhs) {
 		Disc_quote::operator =(std::move(rhs));
 		std::cout << "Bulk_quote : move =()\n";
-
 		return *this;
 	}
 
@@ -56,8 +50,7 @@ public:
         return n*price;
     }
 
-    ~Bulk_quote() override
-	{
+    ~Bulk_quote() override {
 		std::cout << "destructing Bulk_quote\n";
 	}
 };
