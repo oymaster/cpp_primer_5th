@@ -20,12 +20,22 @@ public:
     const T& operator[](size_t index) const {
         return element[index];  // 返回元素的常量引用（用于 const 对象）
     }
-    friend std::ostream& operator<< (std::ostream& os, const Vec& s);
-    Vec& operator+= (const Vec&);
-    friend Vec& operator+ (const Vec&,const Vec&);
-    friend bool operator== (const Vec& lhs,const Vec& rhs);
-    friend bool operator!= (const Vec& lhs,const Vec& rhs);
 
+    friend std::ostream& operator<< (std::ostream& os, const Vec& s){
+            for(size_t i=0;i<s.size();i++){
+            os<<s[i]<<" ";
+        }
+        return os;
+    }
+    friend Vec& operator+ (const Vec&,const Vec&);
+    friend bool operator== (const Vec& lhs,const Vec& rhs){
+        if(lhs.size()!=rhs.size()) return false;
+        for(size_t i=0;i<lhs.size();i++){
+            if(lhs[i]!=rhs[i]) return false;
+        }
+        return true;
+    }
+    friend bool operator!= (const Vec& lhs,const Vec& rhs){return !(lhs==rhs);}
     Vec(std::initializer_list<T> ilist);
     ~Vec();
     void push_back(const T&);
@@ -145,30 +155,6 @@ Vec<T>& Vec<T>::operator=(Vec &&rhs) noexcept{
         cap=rhs.cap;
     }
     return *this;
-}
-
-//重载<<
-template<typename T>
-std::ostream &operator<<(std::ostream &os,const Vec<T> &s){
-    for(size_t i=0;i<s.size();i++){
-        os<<s[i]<<" ";
-    }
-    return os;
-}
-
-
-template<typename T>
-bool operator==(const Vec<T>& lhs,const Vec<T>& rhs){
-    if(lhs.size()!=rhs.size()) return false;
-    for(size_t i=0;i<lhs.size();i++){
-        if(lhs[i]!=rhs[i]) return false;
-    }
-    return true;
-}
-
-template<typename T>
-bool operator!=(const Vec<T>& lhs,const Vec<T>& rhs){
-    return !(lhs==rhs);
 }
 
 template<typename T>
