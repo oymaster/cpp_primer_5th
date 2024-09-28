@@ -10,8 +10,8 @@ public:
     template<typename T>
     void operator() (T *p) const {
         os<<"debug delete\n";
-        delete *p;
+        delete p;
     }
-}
+};
 
 #endif
