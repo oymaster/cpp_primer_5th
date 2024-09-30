@@ -11,7 +11,6 @@ int main() {
     Vec<int>v1;
     string s;
     Vec<string>vec = {"apple", "banana", "cherry"};
-    
     Vec<string> v2=vec;
     // v2[2]="asd";
     Vec<string> moveVec=std::move(vec);
